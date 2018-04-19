@@ -2,6 +2,14 @@
 
 {% block content %}
 <div class="container">
-    <h1>Hello World!</h1>
+    <h1>
+    Hello,
+    {% if current_user.is_authenticated %}
+    {{ current_user.username|title }}
+    {% else %}
+    Stranger
+    {% endif %}!
+    </h1>
+    <hr>
 </div>
 {% endblock %}
