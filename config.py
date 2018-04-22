@@ -9,7 +9,7 @@ class Config:
     #MAIL_PASSWORD = 'abc'
     BLOG_MAIL_SUBJECT_PREFIX = '[Blog]'
     BLOG_MAIL_SENDER = 'Blog Admin <blog@localhost>'
-    ADMIN = 'joe@ariapa.com'
+    BLOG_ADMIN = 'joe@ariapa.com'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
