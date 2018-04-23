@@ -55,7 +55,7 @@ def register():
         db.session.add(user)
         db.session.commit()
 
-        token = User.generate_confirmation_token()
+        token = user.generate_confirmation_token()
         send_email(user.email, 'Confirm Your Accout', 'auth/email/confirm', user=user, token=token)
 
         flash('A confirmation email has been sent to you by email.')

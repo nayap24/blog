@@ -11,6 +11,7 @@ class Config:
     BLOG_MAIL_SENDER = 'Blog Admin <blog@localhost>'
     BLOG_ADMIN = 'joe@ariapa.com'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    BLOG_POSTS_PER_PAGE = 20
 
 
 class DevelopmentConfig(Config):
