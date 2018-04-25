@@ -9,7 +9,6 @@
         </div>
         <div class="media-body">
             <h1 class="media-heading">{{ user.username }}</h1>
-            <hr>
             <p>
             {% if user.first_name and user.last_name %}
                 {{ user.first_name }} {{ user.last_name }}<br>
@@ -28,6 +27,28 @@
                 Member since {{ moment(user.member_since).format('L') }}.
                 Last seen {{ moment(user.last_seen).fromNow() }}.
             </p>
+            <p>{{ user.posts.count() }} blog posts.</p>
+            <p>
+            {% if current_user.can(Permission.FOLLOW) and user != current_user %}
+                {% if not current_user.is_following(user) %}
+                <a href="{{ url_for('.follow', username=user.username) }}"
+                    class="btn btn-primary">Follow</a>
+                {% else %}
+                <a href="{{ url_for('.unfollow', username=user.username) }}"
+                    class="btn btn-default">Unfollow</a>
+                {% endif %}
+            {% endif %}
+            <a href="{{ url_for('.followers', username=user.username) }}">
+                Followers: <span class="badge">{{ user.followers.count() }}</span>
+            </a>
+            <a href="{{ url_for('.followed_by', username=user.username) }}">
+                Following: <span class="badge">{{ user.followed.count() }}</span>
+            </a>
+            {% if current_user.is_authenticated and user != current_user and
+                user.is_following(current_user) %}
+            | <span class="label label-default">Follows you</span>
+            {% endif %}
+            </p>
             <p>
             {% if user == current_user %}
             <a class="btn btn-default" href="{{ url_for('.edit_profile') }}"> Edit Profile </a>
@@ -41,8 +62,10 @@
     
     <h3>Posts by {{ user.username }}</h3>
     {% include '_posts.html' %}
+    {% if pagination %}
     <nav class="text-right">
         {{ macros.pagination_widget(pagination, '.index') }}
     </nav>
+    {% endif %}
 </div>
 {% endblock %}
