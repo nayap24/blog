@@ -18,6 +18,7 @@
         {{ wtf.quick_form(form) }}
         {% endif %}
     </div>
+    <br>
     <div>
         <ul class="nav nav-tabs">
             <li{% if not show_followed %} class="active"{% endif %}><a href="{{ url_for('.show_all') }}">All</a></li>

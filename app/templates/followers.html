@@ -26,9 +26,11 @@
     {% endif %}
     {% endfor %}
     </table>
-    
+   
+    {% if pagination %} 
     <nav class="text-right">
         {{ macros.pagination_widget(pagination, endpoint, username=user.username) }}
     </nav>
+    {% endif %}
 </div>
 {% endblock %}
