@@ -36,7 +36,7 @@ nosetests.xml
 .pydevproject
 
 # Instance Folder - used for configuration parameters
-/instance
+instance/
 
 venv
 app.db
