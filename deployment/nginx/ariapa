@@ -1,0 +1,11 @@
+server {
+    # listen on port 80 (http)
+    listen 80;
+    server_name ariapa.com
+                www.ariapa.com;
+
+    location / {
+        include uwsgi_params;
+        uwsgi_pass unix:/home/joe/www/ariapa/ariapa.sock;
+    }
+}

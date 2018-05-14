@@ -1,0 +1,13 @@
+[Unit]
+Description=uWSGI instance to serve ariapa
+After=network.target
+
+[Service]
+User=joe
+Group=www-data
+WorkingDirectory=/home/joe/www/ariapa
+Environment="PATH=/home/joe/www/ariapa/venv/bin"
+ExecStart=/home/joe/www/ariapa/venv/bin/uwsgi --ini ariapa.ini
+
+[Install]
+WantedBy=multi-user.target
