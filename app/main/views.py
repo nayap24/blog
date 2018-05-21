@@ -1,11 +1,17 @@
 from flask import render_template, url_for, flash, redirect, url_for, request, current_app, abort, make_response
 from flask_login import login_required, current_user
-
 from . import main
 from .forms import EditProfileForm, EditProfileAdminForm, PostForm
 from .. import db
-from ..models import User, Post, Permission
+from ..models import User, Role, Post, Permission
 from ..decorators import admin_required, permission_required
+
+
+@main.route('/logs')
+def logs():
+    with open('logs/ariapa.log', 'r') as f:
+        logs = f.read()
+    return render_template('logs.html', title='Logs', logs=logs)
 
 
 @main.route('/', methods=['GET', 'POST'])

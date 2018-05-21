@@ -37,7 +37,8 @@ nosetests.xml
 
 # Instance Folder - used for configuration parameters
 instance/
+logs/
 
 venv
 app.db
-blog.log*
+ariapa.log*

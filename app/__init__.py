@@ -22,6 +22,7 @@ def create_app(config_name):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(config[config_name])
     app.config.from_pyfile('config.py', silent=True)
+    config[config_name].init_app(app)
 
     Bootstrap(app)
     mail.init_app(app)
@@ -30,6 +31,8 @@ def create_app(config_name):
     moment.init_app(app)
     pagedown.init_app(app)
 
+    from app.errors import errors as errors_blueprint
+    app.register_blueprint(errors_blueprint)
     from app.main import main as main_blueprint
     app.register_blueprint(main_blueprint)
     from app.auth import auth as auth_blueprint
