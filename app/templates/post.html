@@ -1,7 +1,22 @@
 {% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
 
 {% block content %}
 <div class="container">
-  {% include '_posts.html' %}
+    {% include '_posts.html' %}
+    <h4 id="comments">Comments</h4>
+    {% if current_user.can(Permission.COMMENT) %}
+    <div>
+        {{ wtf.quick_form(form) }}
+    </div>
+    {% endif %}
+    <br>
+    {% include '_comments.html' %}
+    {% if pagination %}
+    <nav class="text-right">
+        {{ macros.pagination_widget(pagination, '.post', fragment='#comments', id=posts[0].id) }}
+    </nav>
+    {% endif %}
 </div>
 {% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% import "_macros.html" as macros %}
+
+{% block content %}
+<div class="container">
+    <h1>Comment Moderation</h1>
+    <hr>
+    {% set moderate = True %}
+    <br>
+    {% include '_comments.html' %}
+    {% if pagination %}
+    <nav class="text-right">
+        {{ macros.pagination_widget(pagination, '.moderate') }}
+    </nav>
+    {% endif %}
+</div>
+{% endblock %}

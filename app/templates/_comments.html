@@ -1,0 +1,46 @@
+<table class="table table-hover comments">
+    {% for comment in comments %}
+    <tr><td>
+    <div class="media">
+        <div class="media-left">
+            <a href="{{ url_for('.user', username=comment.author.username) }}">
+                <img class="img-rounded media-object" src="{{ comment.author.gravatar(size=40) }}" />
+            </a>
+        </div>
+        <div class="media-body">
+            <div class="pull-right">{{ moment(comment.timestamp).fromNow() }}</div>
+            <div class="media-heading">
+                <a href="{{ url_for('.user', username=comment.author.username) }}">
+                    {{ comment.author.username }}
+                </a>
+            </div>
+            <div>
+                {% if comment.disabled %}
+                <p><em>This comment has been disabled by a moderator.</em></p>
+                {% endif %}
+                {% if moderate or not comment.disabled %}
+                    {% if comment.body_html %}
+                        {{ comment.body_html | safe }}
+                    {% else %}
+                        {{ comment.body }}
+                    {% endif %}
+                {% endif %}
+            </div>
+            {% if moderate %}
+            <div class="text-right">
+                {% if comment.disabled %}
+                <a href="{{ url_for('.moderate_enable', id=comment.id, page=pange) }}">
+                    <span class="btn btn-default btn-xs">Enable</span>
+                </a>
+                {% else %}
+                <a href="{{ url_for('.moderate_disable', id=comment.id, page=page) }}">
+                    <span class="btn btn-danger btn-xs">Disable</span>
+                </a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    </td></tr>
+    {% endfor %}
+</table>
